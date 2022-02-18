@@ -3,6 +3,9 @@ import styled from "styled-components";
 export const UserList = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
+  font-size:10px;
+  overflow-x: auto;
 `;
 
 export const List = styled.div`
@@ -49,8 +52,10 @@ export const IconButtonWrapper = styled.div`
 
 export const Filters = styled.div`
   display: flex;
+  align-items: center;
   justify-content: center;
   & > * {
     margin-inline-end: 8px;
   }
 `;
+
