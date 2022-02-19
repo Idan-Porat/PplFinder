@@ -3,7 +3,7 @@
   "version": "1.0.7",
   "bin": "./bin/cli.js",
   "license": "MIT",
-  "repository": "https://github.com/idan-porat/PplFinder",
+  "homepage": "https://idan-porat.github.io/PplFinder/",
   "dependencies": {
     "@material-ui/core": "^4.11.4",
     "@material-ui/icons": "^4.11.2",
