@@ -116,13 +116,13 @@ const UserList = ({ users, isLoading, setPageNumber }) => {
 
   return (
     <S.UserList>
-        <S.Filters>
-          {countriesAndValues.map((key, index) => {
-            return (
-              <CheckBox key={index} value={`${key.value}`} label={key.country} onChange={() => handleCheckBoxes(key.country)} />
-            )
-          })}
-        </S.Filters>
+      <S.Filters>
+        {countriesAndValues.map((key, index) => {
+          return (
+            <CheckBox key={index} value={`${key.value}`} label={key.country} onChange={() => handleCheckBoxes(key.country)} />
+          )
+        })}
+      </S.Filters>
       <S.List>
         {list.filter((val) => {
           if (checkedBoxes.length === 0) {
@@ -133,37 +133,38 @@ const UserList = ({ users, isLoading, setPageNumber }) => {
             return country === val?.location.country;
           });
         }).map((user, index) => {
-            return (
-              <S.User
-                key={index}
-                ref={(list.length === index + 1) ? lastUserElement : observerOtherUsers}
-                onMouseEnter={() => handleMouseEnter(index)}
-                onMouseLeave={handleMouseLeave}
-              >
-                <S.UserPicture src={user?.picture.large} alt="" />
-                <S.UserInfo>
-                  <Text size="22px" bold>
-                    {user?.name.title} {user?.name.first} {user?.name.last}
-                  </Text>
-                  <Text size="14px">{user?.email}</Text>
-                  <Text size="14px">
-                    {user?.location.street.number} {user?.location.street.name}
-                  </Text>
-                  <Text size="14px">
-                    {user?.location.city} {user?.location.country}
-                  </Text>
-                </S.UserInfo>
-                <S.IconButtonWrapper onClick={() => handleLikeButton(user)} isVisible={(index === hoveredUserId ||
-                  favorites.some(favorite => {
-                    return favorite === user;
-                  }))}>
-                  <IconButton>
-                    <FavoriteIcon color="error" />
-                  </IconButton>
-                </S.IconButtonWrapper>
-              </S.User>
+          return (
+            <S.User
+              key={index}
+              ref={(list.length === index + 1) ? lastUserElement : observerOtherUsers}
+              onMouseEnter={() => handleMouseEnter(index)}
+              onMouseLeave={handleMouseLeave}
+            >
+              <S.UserPicture src={user?.picture.large} alt="" />
+              <S.UserInfo>
+                <Text size="22px" bold>
+                  {user?.name.title} {user?.name.first} {user?.name.last}
+                </Text>
+                <Text size="14px">{user?.email}</Text>
+                <Text size="14px">
+                  {user?.location.street.number} {user?.location.street.name}
+                </Text>
+                <Text size="14px">
+                  {user?.location.city} {user?.location.country}
+                </Text>
+              </S.UserInfo>
+              <S.IconButtonWrapper onClick={() => handleLikeButton(user)} isVisible={(favorites.some(favorite => {
+                return favorite === user;
+              }) ||
+                index === hoveredUserId
+              )}>
+                <IconButton>
+                  <FavoriteIcon color="error" />
+                </IconButton>
+              </S.IconButtonWrapper>
+            </S.User>
 
-            );
+          );
         })}
         {isLoading && (
           <S.SpinnerWrapper>
