@@ -56,7 +56,10 @@ const UserList = ({ users, isLoading, setPageNumber }) => {
 
   // Update favorites state
   const handleLikeButton = (user) => {
-    if (!favorites.includes(user)) {
+    if(favorites === null) {
+      setFavorites([...new Set([user])]);
+    }
+    else if (!favorites.includes(user)) {
       setFavorites([...new Set([...favorites, user])]);
     } else {
       setFavorites(favorites.filter(val => {
@@ -124,7 +127,7 @@ const UserList = ({ users, isLoading, setPageNumber }) => {
         })}
       </S.Filters>
       <S.List>
-        {list.filter((val) => {
+        {(favorites || users ) && list.filter((val) => {
           if (checkedBoxes.length === 0) {
             return true;
           }
@@ -153,7 +156,7 @@ const UserList = ({ users, isLoading, setPageNumber }) => {
                   {user?.location.city} {user?.location.country}
                 </Text>
               </S.UserInfo>
-              <S.IconButtonWrapper onClick={() => handleLikeButton(user)} isVisible={(favorites.some(favorite => {
+              <S.IconButtonWrapper onClick={() => handleLikeButton(user)} isVisible={(favorites?.some(favorite => {
                 return favorite === user;
               }) ||
                 index === hoveredUserId
